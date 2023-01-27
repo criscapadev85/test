@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RBRSL DEMO</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/nimbus-sans-d-ot" rel="stylesheet">             
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="css/rbrsl.css?v=3">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      .flip-box-front, .flip-box-back {
+        background: transparent;
+      }
+
+      .noborder {
+        background: none;
+      }
+
+    </style>
+    
+      <script type="text/javascript">
+
+        let score = 0;
+let id = 0;
+
+iattuale = 0;
+
+function switchImage(imgthis)
+{
+  if($("#bottom-menu").is(":visible"))
+    { 
+
+    }
+    else
+    {
+
+  setTimeout(function () { 
+  var src = imgthis.attr("src");
+       var flipped = imgthis.attr("data-flipped");
+
+       imgthis.attr("src", flipped);
+       imgthis.attr("data-flipped", src);
+      }, 200);
+
+    }
+}
+
+
+$(document).ready(function() {
+
+  //$(".video-container").css('height', $("#videosource").height());
+
+  $("#blankspace").css('height', $("#bottom-menu").height());
+
+  var height = $("#stickymenu").height();
+
+  $('.card-img-top').each(function() {
+
+    $(this).on({
+    'mouseover': function () {
+        
+       //  rotate($(this));
+    
+          switchImage($(this));
+   
+      
+    },
+    'mouseout' : function () {
+      
+     
+    //  unrotate($(this));
+    
+          switchImage($(this));
+    
+       
+    }
+  });
+
+
+
+     
+  });
+
+
+  /* sistemare  */
+$(window).scroll(function(){
+        $("#side").css("top",Math.max(15,243-$(this).scrollTop()));
+                        
+       if( ($("#stickymenu").offset().top+height) >= $('footer').offset().top ){
+					$("#stickymenu").css('bottom',  $('footer').height()) + 'px';  
+          console.log("menu : " + $("#stickymenu").css('position'));   
+       } 
+       
+       if( ($(this).scrollTop()+height) < ($('footer').offset().top) ){
+        $("#stickymenu").css('bottom',  '');  
+        console.log("menu : " + $("#stickymenu").css('position'));      
+       }
+       
+    });
+  
+  
+        var modbody = $('.fragment');
+        $('.insidemodal').append(modbody);
+   
+
+
+
+  // Make the DIV element draggable:
+dragElement(document.getElementsByClassName("fragment2"));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+ $(".newsletter").draggable();
+    
+    
+  var i = 0;
+
+(function makeDiv(){
+    var divsize = ((Math.random()*100) + 50).toFixed();
+    var color = '#'+ Math.round(0xffffff * Math.random()).toString(16);
+     
+
+    $newdiv = $(`<div class="fragment2">
+        <div>
+            <span class="titlefragment2">TITOLO TITOLO</span><span id='close${score}' onclick='this.parentNode.parentNode.remove(); return false;' style="color:black">x</span><img style='width:250px;height:350px' src='assets/images/img${score}.png' id='${++id}'/></div>
+      </div>`);
+    
+    var posx = (Math.random() * ($("#randompopupcontainer").width() - divsize)).toFixed();
+    var posy = (Math.random() * ($("#randompopupcontainer").height() - divsize)).toFixed();
+
+    console.log("POS X: " + posx + " | POS Y: " + posy)
+    
+    $newdiv.css({
+        'position':'absolute',
+        'left':posx+'px',
+        'top':posy+'px',
+        'display':'none'
+    }).appendTo("#randompopupcontainer").fadeIn(500).delay(300, function(){
+
+      $( ".fragment2" ).draggable();        
+       
+       if(i < 3)
+       {
+       makeDiv(); 
+       score++;
+       i++;
+       }
+    }); 
+})();
+
+
+
+});
+
+
+
+
+
+ 
+function randomTop(divSize) {
+  var posx = (Math.random() * ($("#randompopupcontainer").width() - divSize)).toFixed();
+  return posx + " px";
+}
+
+function randomLeft(divSize) {
+  var posy = (Math.random() * ($("#randompopupcontainer").height() - divSize)).toFixed();
+  return posy + "px";
+}
+        </script>
+  </head>
+  <body>
+    <div class="container-fluid text-center fullheight">
+      <div class="row fullheight">
+        <div class="col-1 colscritta">
+          <span class="scritta_verticale">every step that allows man to move beyound a frontier is a step towards the future.</span>
+        </div>
+        <div class="col-9" id="randompopupcontainer">
+          <span class="scritta_centrale">
+          NO AGE,<br>
+          NO GENDER<br>
+          NO TIME,<br>
+          NO SPACE.<br>
+          UPCYCLING.<br>
+        </span>
+        </div>
+        <div class="col-2 hiddentabletmobile">
+          <div class="row menu-fixed"  id="stickymenu">
+            <div class="col" style="margin-top: 10%;"><img width="150" src="assets/images/logo.png"/></div>
+           
+           
+            <div class="w-100"></div>
+            
+            <div class="col" style="margin-top: 50%;">
+              <ul id="collapseExample1" class="collapse show list-group list-group-flush">
+                <li class="list-group-item py-1">
+                <a href="" class="text-reset">HER</a>
+                </li>
+                <li class="list-group-item py-1">
+                  <a href="" class="text-reset">HIM</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">ART</a>
+                    </li>
+                    
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">WORLD</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="w-100"></div>
+            
+            <div class="col" style="margin-top: 40%;">
+              <ul id="collapseExample1" class="collapse show list-group list-group-flush">
+                <li class="list-group-item py-1">
+                <a href="" class="text-reset">CERCA</a>
+                </li>
+                <li class="list-group-item py-1">
+                  <a href="" class="text-reset">ACCOUNT</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">CARRELLO</a>
+                    </li>
+                    
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">ITALIANO</a>
+                    </li>
+                </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row green text-center">
+        <div class="rectangle green">
+          </div>
+          </div>
+          <div class="row green text-center">
+          <div class="circle">
+            <div class="textcircle">
+              SS 21
+             </div>
+          </div>
+          <div class="textnearcircle">
+            <div class="textnewrcircle">
+              SPRING<br>
+              SUMMER<br>
+              2021
+             </div>
+          </div>
+        </div>
+        <div class="row green text-center">
+            
+          </div>
+        <div class="row row-cols-2 row-cols-md-4 g-4 green" style="padding: 2%;">
+        <div class="col">
+          <div class="card noborder h-100">
+            <!--<div class="card-header">
+              <div class="flip-box">
+                <div class="flip-box-inner">
+                  <div class="flip-box-front">
+                    <img src="assets/images/scarpa.png" class="noborder" />
+                  </div>
+                  <div class="flip-box-back">
+                    <img src="assets/images/scarpa.png" class="noborder" />
+                  </div>
+                </div>
+              </div>
+            </div>-->
+            <img src="assets/images/scarpa.png" class="card-img-top noborder noflipmobile" data-flipped="assets/images/scarpa.png"  />
+            <div class="card-body green">
+              <hr class="separator">
+              <p class="card-text">
+                BOLD UOMO IN PELLE WHITE
+CON SUOLA TRASPARENTE
+              </p>
+              <p class="card-text">
+               &euro;435.00
+              </p>
+              <hr class="separator">
+              <a href="#" class="btn btn-link">QUICKBUY</a>
+                 <a href="#" class="btn btn-link">WHISHLIST</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card noborder h-100">
+            <img src="assets/images/scarpa.png"  data-flipped="assets/images/scarpa.png" class="card-img-top noborder noflipmobile" />
+            <div class="card-body green">
+              <hr class="separator">
+              <p class="card-text">
+                BOLD UOMO IN PELLE WHITE
+CON SUOLA TRASPARENTE
+              </p>
+              <p class="card-text">
+               &euro;435.00
+              </p>
+              <hr class="separator">
+              <a href="#" class="btn btn-link">QUICKBUY</a>
+                 <a href="#" class="btn btn-link">WHISHLIST</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card noborder h-100">
+            <img src="assets/images/scarpa.png"  data-flipped="assets/images/scarpa.png" class="card-img-top noborder noflipmobile" />
+            <div class="card-body green">
+              <hr class="separator">
+              <p class="card-text">
+                BOLD UOMO IN PELLE WHITE
+CON SUOLA TRASPARENTE
+              </p>
+              <p class="card-text">
+               &euro;435.00
+              </p>
+              <hr class="separator">
+              <a href="#" class="btn btn-link">QUICKBUY</a>
+                 <a href="#" class="btn btn-link">WHISHLIST</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card noborder h-100">
+            <img src="assets/images/scarpa.png"  data-flipped="assets/images/scarpa.png" class="card-img-top noborder noflipmobile" />
+            <div class="card-body green">
+              <hr class="separator">
+              <p class="card-text">
+                BOLD UOMO IN PELLE WHITE
+CON SUOLA TRASPARENTE
+              </p>
+              <p class="card-text">
+               &euro;435.00
+              </p>
+              <hr class="separator">
+              <a href="#" class="btn btn-link">QUICKBUY</a>
+                 <a href="#" class="btn btn-link">WHISHLIST</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row insidemodal" style="position: relative;">
+        <section>
+          <img src="assets/images/donna.png" width="350" class="centered" />
+          <div class="scroll text1">
+            <div>
+              BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD
+            </div>
+            <div>
+              BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD
+            </div>
+          </div>
+          <div class="scroll text2">
+            <div>
+              LAMP LAMP LAMP LAMP LAMP LAMP LAMP LAMP LAMP LAMP LAMP LAMP LAMP LAMP LAMP LAMP
+            </div>
+            <div>
+              LAMP LAMP LAMP LAMP LAMP LAMP LAMP LAMP LAMP LAMP LAMP LAMP LAMP LAMP LAMP LAMP
+            </div>
+          </div>
+          <div class="scroll text3">
+            <div>
+              PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING
+            </div>
+            <div>
+              PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING PAINTING
+            </div>
+          </div>
+          <div class="scroll text4">
+            <div>
+              100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK
+            </div>
+            <div>
+              100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK 100M SNK
+            </div>
+          </div>
+          <div class="scroll text5">
+            <div>
+              BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD
+            </div>
+            <div>
+              BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD BOLD
+            </div>
+          </div>
+        </section>
+      </div>
+
+
+      <div class="row video-container">
+        <video id="videosource" autoplay muted loop>
+            <source src="assets/videos/video.mp4" type="video/mp4" />
+        </video>
+        <div class="texttopleft">
+          <h2 class="minecraft">FW2020/21</h2>
+        </div>
+        <div class="centered center-mob">
+        <table border="0" cellspacing="0" cellpadding="0">
+          <tr><td><span class="title title-tabmob">70% OFF</span></td></tr>
+          <tr><td><span class="subtitle subtitle-tabmob">MAN</span> <span class="subtitle scrittaverde subtitle-tabmob">WOMAN</span></td></tr>
+        </table>
+        </div>
+      
+        <div class="textbottomleft">
+          <h2 class="minecraft">OUTLET</h2>
+        </div>
+    </div>
+
+    <footer id="footer">
+      <div class="row breadcumb">
+        
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active">SHOP</li>
+      <li class="breadcrumb-item" aria-current="page">UOMO</li>
+      <li class="breadcrumb-item" aria-current="page">DONNA</li>
+      <li class="breadcrumb-item" aria-current="page">OUTLET MAN</li>
+      <li class="breadcrumb-item" aria-current="page">OUTLET WOMAN</li>
+    </ol>
+  </nav>
+  
+      </div>
+      <div class="row breadcumb">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active">RBRSL WORLD</li>
+            <li class="breadcrumb-item" aria-current="page">ABOUT</li>
+            <li class="breadcrumb-item" aria-current="page">STORE LOCATOR</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="row breadcumb">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active">SERVIZIO CLIENTI</li>
+            <li class="breadcrumb-item" aria-current="page">AIUTO SPEDIZIONI</li>
+            <li class="breadcrumb-item" aria-current="page">PAGAMENTO</li>
+            <li class="breadcrumb-item" aria-current="page">POLITICA DI RESO</li>
+            <li class="breadcrumb-item" aria-current="page">TRACCIA I TUOI ORDINI</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="row breadcumb">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-center" style="float: left;">
+            <li class="breadcrumb-item active">INFORMAZIONI</li>
+            <li class="breadcrumb-item" aria-current="page">CHI SIAMO</li>
+            <li class="breadcrumb-item" aria-current="page">GUIDA ALL'ACQUISTO</li>
+            <li class="breadcrumb-item" aria-current="page">CONDIZIONI GENERALI DI VENDITA</li>
+            <li class="breadcrumb-item" aria-current="page">AREA LEGALE</li>
+            <li class="breadcrumb-item" aria-current="page">INFORMATIVA SUL TRATTAMENTO DEI DATI PERSONALI</li>
+            <li class="breadcrumb-item" aria-current="page">COOKIE POLICY</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="row footer-text">
+        SIVA SRL Fraz. Piticchio 230, 60011 Arcevia (AN) T. +39 07319871 F. +39 0731987245<br>
+  Copyright © 2015 SIVA srl. All rights reserved. P.IVA 02704040423 | Kooomo Digital Commerce By Zerogrey - Design & Development by Neikos.
+        </div>
+        </footer>
+        <div class="row hiddendesktop" id="blankspace" style="position:relative;height: 30px;background-color:none;">
+        </div>
+
+    </div>
+   
+      
+
+      <nav  id="bottom-menu" class="navbar navbar-expand-lg fixed-bottom navbar-dark bg-black hiddendesktop">
+        <div class="container-fluid" style="padding-top: 0 !important;">
+          <a class="navbar-brand" href="#">  <img src="assets/images/logo2.png" height="50" alt="" style="padding:5%;padding-left:10%"></a>
+          
+           <!-- carrello -->
+          <button class="navbar-toggler ms-auto" type="button" data-toggle="collapse" data-target="#links" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon carrello"></span>
+        </button>
+    <!-- account toggle -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#account" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon profilo"></span>
+        </button>
+        <!-- menu toggle -->
+          <button class="navbar-toggler" type="button" style="border:none !important" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">HOME</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">HER</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">HIM</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">ART</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">WORLD</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">CERCA</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">ACCOUNT</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">CARRELLO</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">ITALIANO</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    <div class="fragment newsletter">
+      <div>
+          <span id='close' onclick='this.parentNode.parentNode.remove(); return false;'>x</span>
+          <span class="fragmenttext2">NEWSLETTER.LOG</span><br><br>
+          <h4>ISCRIVITI ALLA<br> NEWSLETTER</h4>
+          <span class="subtilefragment">REGISTRANDOTI ADESSO:</span>
+          <p class="fragmenttext1">
+              - 10% di sconto sul tuo primo ordine.<br>
+              - Solo per te promozioni speciali ed anteprime di collezione
+            </p>
+            <p class="fragmenttext2">
+              Riceverai un'email con la conferma della registrazione alla nostra newsletter.<br><br>
+              <div class="input-group mb-3">
+                <input type="text" id="emailinput" class="form-control" placeholder="INSERISCI LA TUA MAIL" aria-label="INSERISCI LA TUA MAIL" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn buttonnewsletter" type="button">INVIA</button>
+                </div>
+              </div> 
+          </p>
+      </div>
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RBRSL DEMO</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> 
+     <link rel="stylesheet" href="css/rbrsl.css?v=3">
+   <!--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">-->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+       .flip-box-front, .flip-box-back {
+        background: transparent;
+      }
+
+          .noborder {
+        background: none;
+      }
+
+     
+
+     </style>
+     <script type="text/javascript">
+
+      let score = 0;
+let id = 0;
+
+function switchImage(imgthis)
+{
+  if($("#bottom-menu").is(":visible"))
+    { 
+
+    }
+    else
+    {
+
+  setTimeout(function () { 
+  var src = imgthis.attr("src");
+       var flipped = imgthis.attr("data-flipped");
+
+       imgthis.attr("src", flipped);
+       imgthis.attr("data-flipped", src);
+      }, 200);
+
+    }
+}
+
+
+
+$(document).ready(function() {
+
+
+  $(document).on("click", function(event){
+
+      if($(".dropdown-menu").is(":visible"))
+      {
+
+        var $trigger = $(".dropdown");
+        if($trigger !== event.target && !$trigger.has(event.target).length){
+            //$(".dropdown-menu").slideUp("fast");
+            $("#filtroicona").click();
+        }      
+      }      
+    });
+  
+
+  $('.card-img-top').each(function() {
+    
+    var $this = $(this);
+
+    $this.on({
+    'mouseover': function () {
+        
+          switchImage($(this));
+      
+    },
+    'mouseout' : function () {
+      
+          switchImage($(this));
+       
+    }
+  });
+
+});
+
+
+
+$("#blankspace").css('height', $("#bottom-menu").height());
+
+var togSrc = [ "assets/images/plus.png", "assets/images/minus.png" ];
+
+
+
+$(".dropdown").click(function(){
+//  $(".dropdown-menu").toggle( "slow" );
+
+ 
+$(".dropdown-menu").is(":visible") ? $(".dropdown-menu").slideUp() : $(".dropdown-menu").slideDown();
+
+  var src = ($("#filtroicona").attr('src') === 'assets/images/plus.png')
+            ? 'assets/images/minus.png'
+            : 'assets/images/plus.png';
+            $("#filtroicona").attr('src', src);
+  //$("#filtroicona").attr('src') = 'minus.png'; //togSrc[ $("#filtroicona").attr('src').match('plus') ? 1 : 0 ];
+  }
+);
+
+
+
+$("#bottommenu").click(function(){
+  $("#navbarResponsive").toggle('slow');
+  }
+);
+
+
+var height = $("#stickymenu").height();
+
+$(window).scroll(function(){
+        $("#side").css("top",Math.max(15,243-$(this).scrollTop()));
+                        
+       if( ($("#stickymenu").offset().top+height) >= $('footer').offset().top ){
+					$("#stickymenu").css('bottom',  $('footer').height()) + 'px';  
+          console.log("menu : " + $("#stickymenu").css('position'));   
+       } 
+       
+       if( ($(this).scrollTop()+height) < ($('footer').offset().top) ){
+        $("#stickymenu").css('bottom',  '');  
+        console.log("menu : " + $("#stickymenu").css('position'));      
+       }
+       
+    });
+  
+
+}); 
+
+</script>
+  </head>
+  <body>
+    <nav class="menumobile navbar navbar-expand-lg fixed-top navbar-dark bg-dark hiddendesktop green" style="margin: 0 auto;padding: 0;"> <!--style="height:55px !important;padding-top: 0;">-->
+      <div class="dropdown" style="text-align: left;width: 100% !important;margin: 0 auto;">
+        <button class="btn btn-primary dropdown-toggle btnfilter" type="button" data-toggle="dropdown-menu">FILTER
+          <img id="filtroicona" src="assets/images/plus.png" width="16" style="float:right;height: 100%;vertical-align: middle;margin-top: 4px;" /></button>
+        <div class="dropdown-menu list-group list-group-flush" style="display:none;margin-top:0 !important;width: 100%;">
+        <!-- mx-3 mt-4 -->
+          <!-- Collapse 1 -->
+          <a
+            class="list-group-item list-group-item-action py-2 ripple"
+            aria-current="true"
+            data-mdb-toggle="collapse"
+            href="#collapseExample1"
+            aria-expanded="true"
+            aria-controls="collapseExample1"
+          >
+            <span class="titlemenu">STYLE</span>
+          </a>
+          <!-- Collapsed content -->
+          <ul id="collapseExample1" class="collapse show list-group list-group-flush">
+            <li class="list-group-item py-1">
+              <a href="" class="text-reset textgreen">VIEW ALL</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="" class="text-reset textgreen">X</a>
+            </li>
+            <li class="list-group-item py-1">
+              <a href="" class="text-reset">BOLD</a>
+            </li>
+            <li class="list-group-item py-1">
+              <a href="" class="text-reset">SNK 100-M</a>
+            </li>
+            <li class="list-group-item py-1">
+              <a href="" class="text-reset">Link</a>
+            </li>
+          </ul>
+          <!-- Collapse 1 -->
+  
+          <!-- Collapse 1 -->
+          <a
+            class="list-group-item list-group-item-action py-2 ripple"
+            aria-current="true"
+            data-mdb-toggle="collapse"
+            href="#collapseExample1"
+            aria-expanded="true"
+            aria-controls="collapseExample1"
+          >
+            <span class="titlemenu">SIZE</span>
+          </a>
+          <!-- Collapsed content -->
+          <ul id="collapseExample1" class="collapse show list-group list-group-flush">
+            <li class="list-group-item py-1">
+            <a href="" class="text-reset textgreen">TUTTI</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="" class="text-reset textgreen">X</a>
+            </li>
+            <li class="list-group-item py-1">
+              <a href="" class="text-reset">39</a>
+            </li>
+            <li class="list-group-item py-1">
+              <a href="" class="text-reset">40</a>
+            </li>
+            <li class="list-group-item py-1">
+              <a href="" class="text-reset">39</a>
+            </li>
+            <li class="list-group-item py-1">
+              <a href="" class="text-reset">40</a>
+            </li>
+            <li class="list-group-item py-1">
+              <a href="" class="text-reset">39</a>
+            </li>
+            <li class="list-group-item py-1">
+              <a href="" class="text-reset">40</a>
+            </li>
+            <li class="list-group-item py-1">
+              <a href="" class="text-reset">39</a>
+            </li>
+            <li class="list-group-item py-1">
+              <a href="" class="text-reset">40</a>
+            </li>
+            <li class="list-group-item py-1">
+              <a href="" class="text-reset">39</a>
+            </li>
+            <li class="list-group-item py-1">
+              <a href="" class="text-reset">40</a>
+            </li>
+            
+          </ul>
+          <!-- Collapse 1 -->
+          <!-- Collapse 1 -->
+          <a
+            class="list-group-item list-group-item-action py-2 ripple"
+            aria-current="true"
+            data-mdb-toggle="collapse"
+            href="#collapseExample1"
+            aria-expanded="true"
+            aria-controls="collapseExample1"
+          >
+            <span class="titlemenu">COLOR</span>
+          </a>
+          <!-- Collapsed content -->
+          <ul id="collapseExample1" class="collapse show list-group list-group-flush">
+            <li class="list-group-item py-1">
+              <a href="" class="text-reset">TUTTI</a>
+            </li>
+            <li class="list-group-item py-1">
+              <a href="" class="text-reset textgreen">BIANCO</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="" class="text-reset textgreen">X</a>
+             
+            </li>
+            <li class="list-group-item py-1">
+              <a href="" class="text-reset">MULTICOLORE</a>
+            </li>
+            <li class="list-group-item py-1">
+              <a href="" class="text-reset">NERO</a>
+            </li>
+            <li class="list-group-item py-1">
+              <a href="" class="text-reset">ROSSO</a>
+            </li>
+          </ul>
+          <!-- Collapse 1 -->
+  
+  
+        </div> 
+      </div>
+    </nav>
+    <div class="container-fluid text-center fullheight">
+      <div class="row"  style="padding-bottom: 2%">
+        <div class="col-2">
+          <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white sticky-top">
+            <div class="position-sticky">
+              <div class="list-group list-group-flush mx-3 mt-4">
+               
+                <a
+                  class="list-group-item list-group-item-action py-2 ripple"
+                  aria-current="true"
+                  data-mdb-toggle="collapse"
+                  href="#collapseExample1"
+                  aria-expanded="true"
+                  aria-controls="collapseExample1"
+                >
+                  <span class="titlemenu">STYLE</span>
+                </a>
+                <!-- Collapsed content -->
+                <ul id="collapseExample1" class="collapse show list-group list-group-flush">
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset textgreen">VIEW ALL</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="" class="text-reset textgreen">X</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">BOLD</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">SNK 100-M</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">Link</a>
+                  </li>
+                </ul>
+                <!-- Collapse 1 -->
+        
+                <!-- Collapse 1 -->
+                <a
+                  class="list-group-item list-group-item-action py-2 ripple"
+                  aria-current="true"
+                  data-mdb-toggle="collapse"
+                  href="#collapseExample1"
+                  aria-expanded="true"
+                  aria-controls="collapseExample1"
+                >
+                  <span class="titlemenu">SIZE</span>
+                </a>
+                <!-- Collapsed content -->
+                <ul id="collapseExample1" class="collapse show list-group list-group-flush">
+                  <li class="list-group-item py-1">
+                  <a href="" class="text-reset textgreen">TUTTI</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="" class="text-reset textgreen">X</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">39</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">40</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">39</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">40</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">39</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">40</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">39</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">40</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">39</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">40</a>
+                  </li>
+                  
+                </ul>
+                <!-- Collapse 1 -->
+                <!-- Collapse 1 -->
+                <a
+                  class="list-group-item list-group-item-action py-2 ripple"
+                  aria-current="true"
+                  data-mdb-toggle="collapse"
+                  href="#collapseExample1"
+                  aria-expanded="true"
+                  aria-controls="collapseExample1"
+                >
+                  <span class="titlemenu">COLOR</span>
+                </a>
+                <!-- Collapsed content -->
+                <ul id="collapseExample1" class="collapse show list-group list-group-flush">
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">TUTTI</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset textgreen">BIANCO</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="" class="text-reset textgreen">X</a>
+                   
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">MULTICOLORE</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">NERO</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">ROSSO</a>
+                  </li>
+                </ul>
+                <!-- Collapse 1 -->
+        
+        
+              </div>
+            </div>
+          </nav>
+          <!-- Sidebar -->
+        
+           
+        </div>
+        <div class="col-8 listaprodotti">
+          <div class="row row-cols-2 row-cols-md-4 g-4" style="padding-bottom: 2%;">
+            <div class="col"> 
+              <div class="card noborder h-100"> 
+                <img src="assets/images/scarpa2.png" class="card-img-top noborder"  data-flipped="assets/images/scarpa.png"/>
+                <div class="card-body">
+                  <p class="card-text">
+                    BOLD UOMO IN PELLE WHITE
+    CON SUOLA TRASPARENTE
+                  </p>
+                  <p class="card-text">
+                   &euro;435.00
+                  </p>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card noborder h-100"> 
+                <img src="assets/images/scarpa2.png" class="card-img-top noborder"  data-flipped="assets/images/scarpa.png"/>
+                <div class="card-body">
+                  <p class="card-text">BOLD UOMO IN PELLE WHITE
+                    CON SUOLA TRASPARENTE</p>
+                    <p class="card-text">
+                      &euro;435.00
+                     </p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card noborder h-100"> 
+                <img src="assets/images/scarpa2.png" class="card-img-top noborder"  data-flipped="assets/images/scarpa.png"/>
+                <div class="card-body">
+                  <p class="card-text">BOLD UOMO IN PELLE WHITE
+                    CON SUOLA TRASPARENTE</p>
+                    <p class="card-text">
+                      &euro;435.00
+                     </p> 
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card noborder h-100"> 
+                <img src="assets/images/scarpa2.png" class="card-img-top noborder"  data-flipped="assets/images/scarpa.png"/>
+                <div class="card-body">
+                  <p class="card-text">
+                    BOLD UOMO IN PELLE WHITE
+                    CON SUOLA TRASPARENTE
+                  </p>
+                  <p class="card-text">
+                    &euro;435.00
+                   </p>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card noborder h-100"> 
+                <img src="assets/images/scarpa2.png" class="card-img-top noborder"  data-flipped="assets/images/scarpa.png"/>
+                <div class="card-body">
+                  <p class="card-text">
+                    BOLD UOMO IN PELLE WHITE
+    CON SUOLA TRASPARENTE
+                  </p>
+                  <p class="card-text">
+                   &euro;435.00
+                  </p>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card noborder h-100"> 
+                <img src="assets/images/scarpa2.png" class="card-img-top noborder"  data-flipped="assets/images/scarpa.png"/>
+                <div class="card-body">
+                  <p class="card-text">BOLD UOMO IN PELLE WHITE
+                    CON SUOLA TRASPARENTE</p>
+                    <p class="card-text">
+                      &euro;435.00
+                     </p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card noborder h-100"> 
+                <img src="assets/images/scarpa2.png" class="card-img-top noborder"  data-flipped="assets/images/scarpa.png"/>
+                <div class="card-body">
+                  <p class="card-text">BOLD UOMO IN PELLE WHITE
+                    CON SUOLA TRASPARENTE</p>
+                    <p class="card-text">
+                      &euro;435.00
+                     </p> 
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card noborder h-100"> 
+                <img src="assets/images/scarpa2.png" class="card-img-top noborder"  data-flipped="assets/images/scarpa.png"/>
+                <div class="card-body">
+                  <p class="card-text">
+                    BOLD UOMO IN PELLE WHITE
+                    CON SUOLA TRASPARENTE
+                  </p>
+                  <p class="card-text">
+                    &euro;435.00
+                   </p>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card noborder h-100"> 
+                <img src="assets/images/scarpa2.png" class="card-img-top noborder"  data-flipped="assets/images/scarpa.png"/>
+                <div class="card-body">
+                  <p class="card-text">
+                    BOLD UOMO IN PELLE WHITE
+    CON SUOLA TRASPARENTE
+                  </p>
+                  <p class="card-text">
+                   &euro;435.00
+                  </p>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card noborder h-100"> 
+                <img src="assets/images/scarpa2.png" class="card-img-top noborder"  data-flipped="assets/images/scarpa.png"/>
+                <div class="card-body">
+                  <p class="card-text">BOLD UOMO IN PELLE WHITE
+                    CON SUOLA TRASPARENTE</p>
+                    <p class="card-text">
+                      &euro;435.00
+                     </p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card noborder h-100"> 
+                <img src="assets/images/scarpa2.png" class="card-img-top noborder"  data-flipped="assets/images/scarpa.png"/>
+                <div class="card-body">
+                  <p class="card-text">BOLD UOMO IN PELLE WHITE
+                    CON SUOLA TRASPARENTE</p>
+                    <p class="card-text">
+                      &euro;435.00
+                     </p> 
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card noborder h-100"> 
+                <img src="assets/images/scarpa2.png" class="card-img-top noborder"  data-flipped="assets/images/scarpa.png"/>
+                <div class="card-body">
+                  <p class="card-text">
+                    BOLD UOMO IN PELLE WHITE
+                    CON SUOLA TRASPARENTE
+                  </p>
+                  <p class="card-text">
+                    &euro;435.00
+                   </p>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+         <div id="menumobileblock" class="col-2 hiddentabletmobile">
+          <div class="row menu-fixed"  id="stickymenu">
+            <div class="col" style="margin-top: 10%;"><img width="150" src="assets/images/logo.png"/></div>
+           
+            <div class="w-100"></div>
+            
+            <div class="col" style="margin-top: 50%;">
+              <ul id="collapseExample1" class="collapse show list-group list-group-flush">
+                <li class="list-group-item py-1">
+                <a href="" class="text-reset">HER</a>
+                </li>
+                <li class="list-group-item py-1">
+                  <a href="" class="text-reset">HIM</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">ART</a>
+                    </li>
+                    
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">WORLD</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="w-100"></div>
+            
+            <div class="col" style="margin-top: 40%;">
+              <ul id="collapseExample1" class="collapse show list-group list-group-flush">
+                <li class="list-group-item py-1">
+                <a href="" class="text-reset">CERCA</a>
+                </li>
+                <li class="list-group-item py-1">
+                  <a href="" class="text-reset">ACCOUNT</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">CARRELLO</a>
+                    </li>
+                    
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset">ITALIANO</a>
+                    </li>
+                </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+       
+
+    <div class="row green">
+      <nav aria-label="...">
+        <ul class="pagination justify-content-center">
+          <li class="page-item"><a class="page-link" href="#">01</a></li>
+          <li class="page-item"><a class="page-link" href="#">02</a></li>
+          <li class="page-item"><a class="page-link" href="#">03</a></li>
+          <li class="page-item"><a class="page-link" href="#">04</a></li>
+          <li class="page-item"><a class="page-link" href="#">05</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <footer id="footer">
+      <div class="row breadcumb">
+        
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active">SHOP</li>
+            <li class="breadcrumb-item" aria-current="page">UOMO</li>
+            <li class="breadcrumb-item" aria-current="page">DONNA</li>
+            <li class="breadcrumb-item" aria-current="page">OUTLET MAN</li>
+            <li class="breadcrumb-item" aria-current="page">OUTLET WOMAN</li>
+          </ol>
+        </nav>
+        
+            </div>
+            <div class="row breadcumb">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item active">RBRSL WORLD</li>
+                  <li class="breadcrumb-item" aria-current="page">ABOUT</li>
+                  <li class="breadcrumb-item" aria-current="page">STORE LOCATOR</li>
+                </ol>
+              </nav>
+            </div>
+            <div class="row breadcumb">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item active">SERVIZIO CLIENTI</li>
+                  <li class="breadcrumb-item" aria-current="page">AIUTO SPEDIZIONI</li>
+                  <li class="breadcrumb-item" aria-current="page">PAGAMENTO</li>
+                  <li class="breadcrumb-item" aria-current="page">POLITICA DI RESO</li>
+                  <li class="breadcrumb-item" aria-current="page">TRACCIA I TUOI ORDINI</li>
+                </ol>
+              </nav>
+            </div>
+            <div class="row breadcumb">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center" style="float: left;">
+                  <li class="breadcrumb-item active">INFORMAZIONI</li>
+                  <li class="breadcrumb-item" aria-current="page">CHI SIAMO</li>
+                  <li class="breadcrumb-item" aria-current="page">GUIDA ALL'ACQUISTO</li>
+                  <li class="breadcrumb-item" aria-current="page">CONDIZIONI GENERALI DI VENDITA</li>
+                  <li class="breadcrumb-item" aria-current="page">AREA LEGALE</li>
+                  <li class="breadcrumb-item" aria-current="page">INFORMATIVA SUL TRATTAMENTO DEI DATI PERSONALI</li>
+                  <li class="breadcrumb-item" aria-current="page">COOKIE POLICY</li>
+                </ol>
+              </nav>
+            </div>
+       <div class="row footer-text">
+        SIVA SRL Fraz. Piticchio 230, 60011 Arcevia (AN) T. +39 07319871 F. +39 0731987245<br>
+  Copyright © 2015 SIVA srl. All rights reserved. P.IVA 02704040423 | Kooomo Digital Commerce By Zerogrey - Design & Development by Neikos.
+        </div>
+      </footer>
+
+      <div class="row hiddendesktop" id="blankspace" style="position:relative;height: 30px;background-color:none;">
+      </div>
+
+  </div>
+   
+    
+
+    <nav id="bottom-menu" class="navbar navbar-expand-lg fixed-bottom navbar-dark bg-black hiddendesktop">
+      <div class="container-fluid" style="padding-top: 0 !important;">
+        <a class="navbar-brand" href="#">  <img src="assets/images/logo2.png" height="50" alt="" style="padding:5%;padding-left:10%"></a>
+         <!-- carrello -->
+        <button class="navbar-toggler ms-auto" type="button" data-toggle="collapse" data-target="#links" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon carrello"></span>
+      </button>
+  <!-- account toggle -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#account" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon profilo"></span>
+      </button>
+      <!-- menu toggle -->
+        <button class="navbar-toggler" type="button" style="border:none !important" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">HER</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">HIM</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">ART</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">WORLD</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">CERCA</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">ACCOUNT</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">CARRELLO</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">ITALIANO</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  </body>
+</html>
